@@ -15,17 +15,17 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        py: ['3.8', '3.9']
+        py: ['3.9', '3.10', '3.11']
         weldx_version: ['weldx']
         include:
           - os: ubuntu-latest
-            py: 3.8
+            py: '3.10'
             weldx_version: 'git+https://github.com/BAMWelDX/weldx.git'
     env:
       WELDX_VERSION: ${{ matrix.weldx_version }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for all tags and branches
       - uses: actions/setup-python@v4
@@ -53,4 +53,4 @@ jobs:
         run: coverage xml
 
       - name: codecov.io
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v3.1.4
